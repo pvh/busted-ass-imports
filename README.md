@@ -9,3 +9,11 @@
 Our conclusion is that somehow loading `@automerge/automerge-wasm` is causing this event not to fire. In the blutack codebase we tested this by commenting out the `import * as wasm ...` lines in the `automerge-wasm` library at which point the `CONNECTION` string would appear again.
 
 ... Yay.
+
+
+###
+
+Found a workaround.  Setting up the shared worker over and over again in an `setInterval()` and I stop the interval when a "READY" message is sent back.  The good news is that the automerge doc gets created only once even when the worker is created many times.
+This is not ideal but it gives us a way forward until we figure out this bug.
+
+

@@ -1,11 +1,16 @@
 
-console.log('Started up.')
+console.log('Shared Worker Starting')
 
 import * as Automerge from "@automerge/automerge"
+console.log("Create Doc");
 let doc = Automerge.init()
 console.log(doc)
 
-
-onconnect = () => {
-  console.log("CONNECTION!")
+onconnect = (e) => {
+  console.log("Connection!");
+  const port = e.ports[0];
+  port.start();
+  port.postMessage("READY");
 }
+
+console.log('End.')
